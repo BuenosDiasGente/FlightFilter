@@ -11,15 +11,17 @@ import java.util.Objects;
 public class Segment {
     private final LocalDateTime departureDate;
     private final LocalDateTime arrivalDate;
+
     public Segment(final LocalDateTime dep, final LocalDateTime arr) {
         this.departureDate = Objects.requireNonNull(dep);
         this.arrivalDate = Objects.requireNonNull(arr);
     }
-  public LocalDateTime getDepartureDate() {
+
+    public LocalDateTime getDepartureDate() {
         return this.departureDate;
     }
 
-   public LocalDateTime getArrivalDate() {
+    public LocalDateTime getArrivalDate() {
         return this.arrivalDate;
     }
 
@@ -43,4 +45,5 @@ public class Segment {
     public int hashCode() {
         return Objects.hash(getDepartureDate(), getArrivalDate());
     }
+
 }

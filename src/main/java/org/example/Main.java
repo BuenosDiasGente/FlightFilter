@@ -17,21 +17,18 @@ public class Main {
         printFlight(flightList, ALL_FLIGHTS);
 
         List<Flight> filterDeparture = new DepartureFlightFilterServiceImpl().filter(flightList);
-        printFlight(filterDeparture, FLIGHT_IS_FILTER_DEPARTURE);
+         printFlight(filterDeparture, FLIGHT_IS_FILTER_DEPARTURE);
 
         List<Flight> filterArrival = new ArrivalFlightFilterServiceImpl().filter(flightList);
         printFlight(filterArrival, FLIGHT_IS_FILTER_ARRIVAL);
 
         List<Flight> filterInterval = new IntervalFlightFilterServiceImpl().filter(flightList);
         printFlight(filterInterval, FLIGHT_IS_FILTER_INTERVAL);
-
     }
 
     private static void printFlight(List<Flight> flights, String note) {
         System.out.println(note);
-        for (Flight flight : flights) {
-            System.out.println(flight);
-        }
+        flights.forEach(System.out::println);
         System.out.println("-------------------------------------------------");
     }
 }

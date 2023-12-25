@@ -18,16 +18,34 @@ public class DepartureFlightFilterServiceImpl implements FlightFilterService {
      */
     @Override
     public List<Flight> filter(List<Flight> flightList) {
-        List<Flight> flights=new ArrayList<>();
+        List<Flight> flights = new ArrayList<>();
         for (Flight flight : flightList) {
             for (Segment seg : flight.getSegments()) {
-                if (seg.getDepartureDate().isAfter(LocalDateTime.now())) {
+                if (LocalDateTime.now().isBefore(seg.getDepartureDate())) {
                     flights.add(flight);
-                } else {
                     break;
                 }
             }
         }
         return flights;
     }
+
+
+//        List<Flight> filteredFlights = new ArrayList<>();
+//        LocalDateTime now = LocalDateTime.now();
+//        flightList.stream()
+//                .forEach(flight -> {
+//                    flight.getSegments().stream()
+//                            .forEach(segment -> {
+//                                if (now.isBefore(segment.getDepartureDate())) {
+//                                    filteredFlights.add(flight);
+//                                }
+//                            });
+//                });
+//        return filteredFlights;
+//    }
+
 }
+
+
+

@@ -1,13 +1,10 @@
 package org.example.service.impl;
 
 import org.example.model.Flight;
-import org.example.model.Segment;
 import org.example.service.FlightFilterService;
 
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IntervalFlightFilterServiceImpl implements FlightFilterService {
     /**
@@ -20,18 +17,9 @@ public class IntervalFlightFilterServiceImpl implements FlightFilterService {
      */
     @Override
     public List<Flight> filter(List<Flight> flightList) {
-        List<Flight> flights=new ArrayList<>();
-        for (Flight flight : flightList) {
-            for (Segment seg : flight.getSegments()) {
-                LocalDateTime arrivalDate = seg.getArrivalDate();
-                LocalDateTime departureDate = seg.getDepartureDate();
-                if (ChronoUnit.HOURS.between(arrivalDate, departureDate) < 2) {
-                    flights.add(flight);
-                } else {
-                    break;
-                }
-            }
-        }
-        return flights;
+        return flightList.parallelStream()
+                .filter(flight -> flight.IntervalTime() < 2)
+                .collect(Collectors.toList());
     }
+
 }

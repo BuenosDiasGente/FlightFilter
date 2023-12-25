@@ -17,12 +17,11 @@ public class ArrivalFlightFilterServiceImpl implements FlightFilterService {
      */
     @Override
     public List<Flight> filter(List<Flight> flightList) {
-        List<Flight> flights=new ArrayList<>();
+        List<Flight> flights = new ArrayList<>();
         for (Flight flight : flightList) {
             for (Segment seg : flight.getSegments())
                 if (seg.getArrivalDate().isAfter(seg.getDepartureDate())) {
                     flights.add(flight);
-                } else {
                     break;
                 }
         }
